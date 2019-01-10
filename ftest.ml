@@ -23,7 +23,7 @@ let () =
 	let intgraph_flo = Graph.map graph_flo int_of_string in
 
 	(* Recursive function that finds paths until there are no more or we reach maximum flow possible *)
-	let rec fire intgraph_floo flow aux= 
+	let rec fire intgraph_floo flow= 
 		let chemin_new= FFulk.parcour intgraph_floo _source _sink in (* Find a path *)
 		let delta_new= FFulk.find_delta intgraph_floo chemin_new in (* Calculate the min flow of that specific path *)
 		let accflow=flow+delta_new in (* Update the cumulative flow of the graph *)
@@ -35,11 +35,10 @@ let () =
 		let intgraph_flo_new=FFulk.update intgraph_floo delta_new chemin_new in (* Update the graph by substracting and adding flow as needed *)
 
 
-		Gfile.export (outfile^(string_of_int aux)) (Graph.map intgraph_flo_new string_of_int); (* Make the dot file *)
+		Gfile.export outfile (Graph.map intgraph_flo_new string_of_int); (* Make the dot file *)
 
 
 		Printf.printf ("The cumulative flow is %d\n") accflow;
-		fire intgraph_flo_new accflow (aux+1);
+		fire intgraph_flo_new accflow;
 	in
-	try fire intgraph_flo 0 0  with Culdesac -> Printf.printf ("--Algorithm Finished--\n")
-
+	try fire intgraph_flo 0  with Culdesac -> Printf.printf ("--Algorithm Finished--\n")
