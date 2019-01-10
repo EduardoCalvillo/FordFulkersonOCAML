@@ -74,7 +74,7 @@ let from_file path =
  
 
 (* Make the dot file for the graph img creation *)
-let export path graph=
+let export path graph =
 
   (* Open a write-file. *)
   let ff = open_out path in
@@ -82,6 +82,7 @@ let export path graph=
   (* Write in this file. *)
   fprintf ff "digraph finite_state_machine {\n \n size=\"8,5\"\n node [shape = circle];\n";
 
+  (* Write the arcs in the dot file with line width according to flow available through the arc *)
   v_iter graph (fun id out -> List.iter (fun (id2, lbl) -> fprintf ff "%s -> %s [ label = \"%s\", penwidth = \"%f\" ];\n" id id2 lbl (((float_of_string lbl)/.4.0)+.0.2)) out) ;
   
   fprintf ff "}\n" ;

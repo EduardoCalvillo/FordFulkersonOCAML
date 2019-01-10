@@ -74,7 +74,7 @@ let from_file path =
  
 
 (* Make the dot file for the graph img creation *)
-let export path graph chemin=
+let export path graph =
 
   (* Open a write-file. *)
   let ff = open_out path in

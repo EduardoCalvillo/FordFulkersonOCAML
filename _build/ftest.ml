@@ -12,7 +12,6 @@ let () =
   	let infile = Sys.argv.(1)
   	and outfile = Sys.argv.(4)
   
-  	(* These command-line arguments are not used for the moment. *)
   	and _source = Sys.argv.(2)
   	and _sink = Sys.argv.(3) 
   	in
@@ -23,11 +22,11 @@ let () =
 	(* Change the graph into integers for easy calculations *)
 	let intgraph_flo = Graph.map graph_flo int_of_string in
 
-	(* Recursive function that finds paths util there are no more or we reach maximum flow possible *)
+	(* Recursive function that finds paths until there are no more or we reach maximum flow possible *)
 	let rec fire intgraph_floo flow aux= 
 		let chemin_new= FFulk.parcour intgraph_floo _source _sink in (* Find a path *)
-		let delta_new= FFulk.find_delta intgraph_floo chemin_new in (* Calculate the max flow of that specific path *)
-		let accflow=flow+delta_new in (* Update the cumulative max flow of the graph *)
+		let delta_new= FFulk.find_delta intgraph_floo chemin_new in (* Calculate the min flow of that specific path *)
+		let accflow=flow+delta_new in (* Update the cumulative flow of the graph *)
 
 		Printf.printf "The chosen path is: ";
 		List.iter (fun x->Printf.printf "%s " x) chemin_new; (* Display the path and its flow *)

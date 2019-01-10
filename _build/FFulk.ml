@@ -17,9 +17,9 @@ in
 loop [s] [s] s (out_arcs graph s)
 
 
-(* Calculate the highest flow found in the path *)
+(* Calculate the lowest flow found in the path *)
 let find_delta gr chemin=
- let d=1000 in  (*find_arc gr chemin[0] chemin[1] in on prend delta = a la valeur min de cout-flow du premier arc par défaut*)
+ let d=1000 in (* Infini *) 
  let rec loop delta list=match list with
  |[]->delta
  |x::[]->delta
@@ -30,14 +30,14 @@ in
 loop d chemin
 
 
-(* Substract the max flow achieved in the path from the arcs and add the flow to the backward arcs *)
+(* Substract the min flow achieved in the path from the arcs and add the flow to the backward arcs *)
 let update graph delta chemin=
  let rec loop gr d list=match list with
  |[]->gr
  |x::[]->gr
  |x::y::nxt->match (find_arc gr x y),(find_arc gr y x) with
   |None, _->failwith "Oops Update"
-  |Some v, None-> loop (add_arc (add_arc gr y x (d)) x y (v-d)) d (y::nxt)
+  |Some v, None-> loop (add_arc (add_arc gr y x (d)) x y (v-d)) d (y::nxt) (* If there's no backward arc we only add delta *)
   |Some v,Some w-> loop (add_arc (add_arc gr y x (w+d)) x y (v-d)) d (y::nxt)
 in 
  loop graph delta chemin
