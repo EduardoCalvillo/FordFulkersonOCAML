@@ -1,9 +1,12 @@
 # FordFulkersonOCAML
-<b>ftest.ml</b> -> Est le programme que nous executons dans le terminal. Celui ci prend en paramètre le graph, le noeud initial, le noeud final et le nom du fichier dans lequel nous mettons le nouveau graphe: ./ftest.byte graph.txt NoeudInit NoeudFinal graphFinal.
+Pour exécuter le programme il faut compiler avec <i>ocamlbuild ftest.byte</i> et aprés dans la terminale lui donner comme paramètre    la graph à utiliser en .txt, le Noeud Initial en entier, le Noeud Final en entier, et le nom du fichier de sortie.
+<blockquote>Example: ./ftest.byte graphOG.txt 0 5 GraphResultat</blockquote>
 
-<b>FFulk.ml</b> -> On y trouve 3 fonctions principales: parcour du graphe, find_delta et update. Vous trouverez la définition des fonctions dans le document.
+<b>ftest.ml</b> -> Est le programme qui combine les fonctions developpées dans les autres fichiers et qui applique l'algorithme de Ford Fulkerson à un graphe fournis.
 
-<b>gfile.ml</b> -> Cette fonction nous permet d'ecrire et lire les différents fichiers.
+<b>FFulk.ml</b> -> On y trouve 3 fonctions principales: parcour du graphe, find_delta et update. 
+
+<b>gfile.ml</b> -> Cette fonction nous permet d'écrire et lire les différents fichiers.
 
 <b>graph.ml</b> -> Permet d'éditer le graphe, il s'occupe de la liaison entre la fonction et notre graphe.
 
